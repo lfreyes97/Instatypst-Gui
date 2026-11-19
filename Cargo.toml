@@ -1,0 +1,14 @@
+[package]
+name = "instatypst-gui"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+eframe = "0.36"
+egui = "0.36"
+egui_dock = "0.21.1"
+egui-phosphor = "0.14.0"
+
+[profile.release]
+opt-level = 2
+lto = "thin"
