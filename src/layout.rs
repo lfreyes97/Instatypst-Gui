@@ -13,10 +13,11 @@ pub enum Tab {
     Style,
     Format,
     Color,
+    Issues,
 }
 
 impl Tab {
-    pub const ALL: [Tab; 8] = [
+    pub const ALL: [Tab; 9] = [
         Tab::Editor,
         Tab::Preview,
         Tab::Content,
@@ -25,6 +26,7 @@ impl Tab {
         Tab::Style,
         Tab::Format,
         Tab::Color,
+        Tab::Issues,
     ];
 
     pub fn name(self) -> &'static str {
@@ -34,9 +36,10 @@ impl Tab {
             Tab::Editor => "Editor Typst",
             Tab::Preview => "Vista previa",
             Tab::Template => "Plantilla",
-            Tab::Style => "Estilo visual",
-            Tab::Format => "Formato",
+            Tab::Style => "Pieza",
+            Tab::Format => "Tipografía",
             Tab::Color => "Color",
+            Tab::Issues => "Incidencias",
         }
     }
 
@@ -47,9 +50,10 @@ impl Tab {
             Tab::Editor => ic::FILE_CODE,
             Tab::Preview => ic::IMAGE,
             Tab::Template => ic::SQUARES_FOUR,
-            Tab::Style => ic::PALETTE,
+            Tab::Style => ic::SLIDERS_HORIZONTAL,
             Tab::Format => ic::TEXT_AA,
             Tab::Color => ic::PAINT_BUCKET,
+            Tab::Issues => ic::WARNING_CIRCLE,
         }
     }
 
@@ -58,7 +62,7 @@ impl Tab {
     }
 
     fn is_left(self) -> bool {
-        matches!(self, Tab::Content | Tab::Files)
+        matches!(self, Tab::Content | Tab::Files | Tab::Issues)
     }
 
     fn is_right(self) -> bool {
@@ -140,7 +144,7 @@ impl Preset {
         let first = match self {
             // Tres columnas (pantalla pequeña): contenido y archivos van como
             // pestañas junto al editor, que queda activo.
-            Preset::Studio => vec![Tab::Editor, Tab::Content, Tab::Files],
+            Preset::Studio => vec![Tab::Editor, Tab::Content, Tab::Files, Tab::Issues],
             _ => vec![Tab::Editor],
         };
         let mut dock = DockState::new(first);
@@ -152,7 +156,7 @@ impl Preset {
             }
             Preset::Classic => {
                 let [editor, _] = s.split_right(NodeIndex::root(), frac::CLASSIC_MAIN, vec![Tab::Preview]);
-                s.split_left(editor, frac::CLASSIC_LEFT, vec![Tab::Content, Tab::Files]);
+                s.split_left(editor, frac::CLASSIC_LEFT, vec![Tab::Content, Tab::Files, Tab::Issues]);
             }
             Preset::PreviewFocus => {
                 let [_, right] = s.split_right(NodeIndex::root(), frac::FOCUS_EDITOR, vec![Tab::Preview]);

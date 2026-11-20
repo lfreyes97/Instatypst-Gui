@@ -19,6 +19,7 @@ pub struct Palette {
     pub on_accent: Color32,
     pub ok: Color32,
     pub warn: Color32,
+    pub err: Color32,
 }
 
 const fn c(r: u8, g: u8, b: u8) -> Color32 {
@@ -39,6 +40,7 @@ pub const DARK: Palette = Palette {
     on_accent: c(0x1a, 0x12, 0x08),
     ok: c(0x8b, 0xe0, 0x9b),
     warn: c(0xe0, 0xb4, 0x5a),
+    err: c(0xf0, 0x6b, 0x6b),
 };
 
 pub const LIGHT: Palette = Palette {
@@ -55,6 +57,7 @@ pub const LIGHT: Palette = Palette {
     on_accent: c(0x1a, 0x12, 0x08),
     ok: c(0x1f, 0x9d, 0x55),
     warn: c(0xb7, 0x79, 0x1f),
+    err: c(0xc9, 0x38, 0x38),
 };
 
 /// Escala de dimensiones de la interfaz (px lógicos, rejilla de 4 px).
@@ -79,6 +82,8 @@ pub mod dims {
     pub const H_CTRL_LG: f32 = 36.0;
     /// Filas de lista de una línea y botón principal.
     pub const H_ROW: f32 = 40.0;
+    /// Controles de la barra superior (una fila baja, como una barra de título).
+    pub const H_BAR: f32 = 28.0;
     /// Filas de lista de dos líneas (título + metadato).
     pub const H_ROW_2: f32 = 48.0;
 
@@ -107,9 +112,10 @@ pub mod dims {
     pub const G_LG: f32 = 18.0;
 
     // --- Marco de la ventana ---
-    /// Margen exterior de la ventana y separación barra ↔ dock.
+    /// Margen exterior de la ventana y separación barra ↔ dock. `TOPBAR_H` es la
+    /// altura exterior de la barra (incluye el margen superior de `GUTTER`).
     pub const GUTTER: i8 = 8;
-    pub const TOPBAR_H: f32 = 60.0;
+    pub const TOPBAR_H: f32 = 52.0;
     pub const TAB_BAR_H: f32 = 32.0;
     /// Relleno interior del cuerpo de cada panel.
     pub const PANEL_PAD: i8 = 10;

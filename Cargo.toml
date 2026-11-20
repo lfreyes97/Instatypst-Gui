@@ -8,7 +8,19 @@ eframe = "0.36"
 egui = "0.36"
 egui_dock = "0.21.1"
 egui-phosphor = "0.14.0"
+instatypst-piece = { git = "https://github.com/lfreyes97/typst-rrss", tag = "v0.1.0" }
+instatypst-bridge = { git = "https://github.com/lfreyes97/typst-rrss", tag = "v0.1.0" }
+instatypst-engine = { git = "https://github.com/lfreyes97/typst-rrss", tag = "v0.1.0" }
+toml_edit = "0.23"
+toml = "1.0.0"
+instatypst-color = { git = "https://github.com/lfreyes97/typst-rrss", tag = "v0.1.0" }
+serde_json = "1"
+rfd = "0.17.2"
+typst-syntax = "=0.15.1"
 
 [profile.release]
 opt-level = 2
 lto = "thin"
+
+[dev-dependencies]
+tiny-skia = "0.12"
